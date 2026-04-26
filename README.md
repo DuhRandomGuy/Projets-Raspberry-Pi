@@ -1,33 +1,46 @@
-# Raspberry Pi Cyber-Lab
-Bienvenue dans mon dépôt de mes projets avec mon Raspberry Pi. Ce projet regroupe mes différentes configurations de serveurs et d'outils réseau basés sur Raspberry Pi, avec une emphase particulière sur le durcissement système (Hardening) et la sécurisation des flux.
+# Raspberry Pi 5 NAS et Home Server
 
-## Vue d'ensemble
-L'objectif de ce laboratoire est de simuler un environnement d'entreprise sécurisé à petite échelle pour pratiquer l'administration système Linux, la gestion réseau et les concepts de cybersécurité.
+This repository documents the complete configuration of my personal NAS based on a **Raspberry Pi 5**. The goal is to centralize file storage, manage local backups, and host essential network services (such as ad-blocking) via Docker.
 
-## Projets inclus
-NAS Sécurisé (OpenMediaVault)
-Transformation d'un Raspberry Pi 5 en serveur de stockage robuste.
+## Key Features
+* **Centralized Storage:** Managed via OpenMediaVault (OMV).
+* **Containerization:** Services deployed using Docker and Portainer.
+* **Secure Remote Access:** VPN connectivity via Tailscale.
+* **Network Security:** DNS-level ad and tracker blocking with AdGuard Home.
 
-Technologies : OMV, SMB/NFS, RAID, EXT4.
+## Hardware
+* **Device:** Raspberry Pi 5 with an active cooling case.
+* **OS Storage:** 32GB MicroSD Card.
+* **Data Storage:** 1TB External HDD.
+* **Networking:** Connected to the local Ethernet network via a Gigabit switch.
 
-Focus Sécurité : Gestion fine des ACLs (Access Control Lists), désactivation des services inutiles, et monitoring des logs d'accès.
+## Network Configuration & Services
 
-Lien vers le dossier : /NAS-Storage
+The infrastructure relies on a clear separation between the host and containerized services:
 
-## Protection Réseau (Pi-hole)
-Mise en place d'un pare-feu DNS pour l'ensemble du réseau local.
+| Service | Technology | Description |
+| :--- | :--- | :--- |
+| **OpenMediaVault** | Debian-based | Disk management, SMB/NFS shares, and monitoring. |
+| **Tailscale** | Wireguard | Mesh VPN to access the NAS remotely without opening ports. |
+| **AdGuard Home** | DNS | Network-wide ad and tracker filtering. |
+| **Portainer** | Docker | Graphical interface for container management. |
 
-Technologies : DNS Sinkhole, FTL, Blocklists.
+For specific services like **AdGuard Home**, I use a **MacVLAN** network to assign them a dedicated IP address on my local network. This prevents port conflicts with the OMV web interface and allows for better network management.
 
-Focus Sécurité : Protection contre le pistage, blocage des domaines de télémétrie et réduction de la surface d'attaque publicitaire.
+## Installation
 
-Lien vers le dossier : /Pi-hole-Security
+### 1. OS Preparation
+Installed Raspberry Pi OS Lite (64-bit) using Raspberry Pi Imager on the SD card. 
+> **Note:** The username and password set during this step are used for initial SSH access.
 
-## Comment utiliser ce dépôt ?
-Chaque sous-dossier contient :
+### 2. Connexion au Raspberry Pi
+Once the Pi is connected to the network, I accessed it via SSH from my computer (Windows PowerShell). To connect, use the following command:
+```bash
+ssh username@ip
+```
 
-Un fichier README.md détaillé avec les étapes d'installation.
-
-Les scripts de configuration (.sh) utilisés.
-
-Les fichiers de configuration (.conf) anonymisés.
+### 3. OMV installation
+Now connected, use the following command to begin installing Open Media Vault on the Pi
+```bash
+wget -O - [https://github.com/OpenMediaVault-Plugin-Developers/installScript/raw/master/install](https://github.com/OpenMediaVault-Plugin-Developers/installScript/raw/master/install) | sudo bash
+```
