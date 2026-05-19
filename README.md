@@ -32,6 +32,9 @@ For specific services like **AdGuard Home**, I use a **MacVLAN** network to assi
 ### 1. OS Preparation
 Installed Raspberry Pi OS Lite (64-bit) using Raspberry Pi Imager on the SD card. 
 > **Note:** The username and password set during this step are used for initial SSH access.
+Image of the successful installation
+<img width="847" height="599" alt="image" src="https://github.com/user-attachments/assets/02383c76-a2d9-4b43-8fb2-56258a8ff817" />
+
 
 ### 2. Connexion au Raspberry Pi
 Once the Pi is connected to the network, I accessed it via SSH from my computer (Windows PowerShell). To connect, use the following command:
