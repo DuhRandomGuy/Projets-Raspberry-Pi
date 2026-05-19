@@ -33,6 +33,7 @@ For specific services like **AdGuard Home**, I use a **MacVLAN** network to assi
 Installed Raspberry Pi OS Lite (64-bit) using Raspberry Pi Imager on the SD card. 
 > **Note:** The username and password set during this step are used for initial SSH access.
 <img width="847" height="599" alt="image" src="https://github.com/user-attachments/assets/02383c76-a2d9-4b43-8fb2-56258a8ff817" />
+
 Image of the successful installation
 
 ### 2. Connexion au Raspberry Pi
